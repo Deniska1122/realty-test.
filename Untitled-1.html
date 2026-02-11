@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NON-STOP REALTY | Luxury Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root { --gold: #C5A059; --dark-bg: #0a0a0a; --transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        body, html { margin: 0; padding: 0; background: var(--dark-bg); color: #fff; font-family: 'Montserrat', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+        #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 1; pointer-events: none; }
+        .bg-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(197, 160, 89, 0.05) 0%, transparent 70%); z-index: 1; pointer-events: none; }
+        .navbar { position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 30px 60px; box-sizing: border-box; z-index: 1000; background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(197, 160, 89, 0.1); }
+        .brand { font-weight: 800; letter-spacing: 5px; text-transform: uppercase; font-size: 14px; text-decoration: none; color: #fff; }
+        .brand span { color: var(--gold); }
+        .admin-trigger { font-size: 10px; letter-spacing: 2px; color: var(--gold); cursor: pointer; text-transform: uppercase; opacity: 0.6; transition: 0.3s; }
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; z-index: 2; }
+        .diamond-logo { width: 100px; height: 100px; border: 1px solid var(--gold); transform: rotate(45deg); display: flex; justify-content: center; align-items: center; background: rgba(197, 160, 89, 0.03); transition: var(--transition); cursor: pointer; margin-bottom: 50px; }
+        .diamond-logo:hover { transform: rotate(135deg); background: var(--gold); box-shadow: 0 0 40px rgba(197, 160, 89, 0.3); }
+        .logo-inner { transform: rotate(-45deg); display: flex; flex-direction: column; align-items: center; }
+        .logo-inner span { font-family: 'Playfair Display'; font-size: 32px; color: var(--gold); font-weight: 700; line-height: 0.8; }
+        .hero-heading { font-family: 'Playfair Display'; font-size: clamp(40px, 8vw, 80px); margin: 20px 0; font-weight: 700; background: linear-gradient(to right, #fff, var(--gold), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size: 200% auto; animation: shine 6s linear infinite; }
+        @keyframes shine { to { background-position: 200% center; } }
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 100px 40px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .card { background: rgba(255, 255, 255, 0.02); padding: 60px 40px; border: 1px solid rgba(197, 160, 89, 0.1); transition: var(--transition); text-align: center; cursor: pointer; }
+        .card:hover { border-color: var(--gold); background: rgba(197, 160, 89, 0.05); transform: translateY(-10px); }
+        .card h3 { font-family: 'Playfair Display'; font-size: 28px; color: var(--gold); margin-bottom: 20px; }
+        .catalog-title { text-align: center; color: var(--gold); font-size: 11px; letter-spacing: 10px; text-transform: uppercase; margin: 120px 0 60px; opacity: 0.5; }
+        #admin-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
+        .obj-item { border: 1px solid rgba(197, 160, 89, 0.2); padding: 40px; background: rgba(255,255,255,0.01); }
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(15px); }
+        .modal.active { display: flex; }
+        .modal-content { background: #0d0d0d; border: 1px solid var(--gold); padding: 60px 50px; width: 90%; max-width: 500px; position: relative; }
+        .close-btn { position: absolute; top: 25px; right: 25px; color: var(--gold); cursor: pointer; font-size: 30px; }
+        form { display: flex; flex-direction: column; gap: 25px; margin-top: 30px; }
+        input, select, textarea { background: transparent; border: 1px solid rgba(197, 160, 89, 0.2); padding: 18px; color: #fff; font-family: 'Montserrat'; outline: none; }
+        .submit-btn { background: var(--gold); color: #000; border: none; padding: 20px; font-weight: 800; text-transform: uppercase; cursor: pointer; letter-spacing: 3px; }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="bg-overlay"></div>
+    <header class="navbar">
+        <a href="#" class="brand">NON-STOP <span>REALTY</span></a>
+        <div class="admin-trigger" onclick="openAdmin()">Admin Access</div>
+    </header>
+    <section class="hero">
+        <div class="diamond-logo"><div class="logo-inner"><span>N</span><span>S</span></div></div>
+        <h1 class="hero-heading">Глубина решений</h1>
+    </section>
+    <div class="container">
+        <div class="grid">
+            <div class="card" onclick="openForm('Купить')"><h3>Купить</h3><p>Эксклюзивный поиск объектов.</p></div>
+            <div class="card" onclick="openForm('Снять')"><h3>Снять</h3><p>Лучшие апартаменты в городе.</p></div>
+            <div class="card" onclick="openForm('Продать')"><h3>Продать</h3><p>Реализация вашего актива.</p></div>
+            <div class="card" onclick="openForm('Сдать')"><h3>Сдать</h3><p>Управление вашей недвижимостью.</p></div>
+        </div>
+        <div class="catalog-title">Объекты в продаже</div>
+        <div id="admin-list"></div>
+    </div>
+
+    <div id="modalClient" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeM('modalClient')">&times;</span><h2 id="mTitle" style="color:var(--gold)">Заявка</h2><form id="formClient"><input type="text" placeholder="Ваше имя" required><input type="tel" placeholder="Ваш телефон" required><textarea placeholder="Детали" rows="3"></textarea><button type="submit" class="submit-btn">Отправить</button></form></div></div>
+    <div id="modalAdmin" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeM('modalAdmin')">&times;</span><h2 style="color:var(--gold)">Добавить лот</h2><form id="formAdmin"><select id="admType"><option>ПРОДАЖА</option><option>АРЕНДА</option></select><input type="text" id="admName" placeholder="Название объекта" required><input type="text" id="admPrice" placeholder="Стоимость" required><textarea id="admDesc" placeholder="Описание" rows="3"></textarea><button type="submit" class="submit-btn">Опубликовать</button></form></div></div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDvTDWO12bUtNnTPx98jK6UmZDvrFedeTo",
+            authDomain: "nonstopralktf.firebaseapp.com",
+            projectId: "nonstopralktf",
+            storageBucket: "nonstopralktf.firebasestorage.app",
+            messagingSenderId: "275641532028",
+            appId: "1:275641532028:web:4124e2bf27f01287a213f9"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function load() {
+            const list = document.getElementById('admin-list');
+            const q = query(collection(db, "properties"), orderBy("createdAt", "desc"));
+            const snap = await getDocs(q);
+            list.innerHTML = '';
+            snap.forEach(doc => {
+                const d = doc.data();
+                list.innerHTML += `<div class="obj-item"><div style="font-size:9px; color:var(--gold); letter-spacing:4px; margin-bottom:15px; text-transform:uppercase">${d.type}</div><h3 style="margin:0; font-family:'Playfair Display'; font-size:24px;">${d.name}</h3><p style="color:var(--gold); font-weight:600; font-size:18px; margin:15px 0">${d.price}</p><p style="font-size:12px; opacity:0.5; line-height:1.6">${d.desc}</p></div>`;
+            });
+        }
+
+        document.getElementById('formAdmin').onsubmit = async (e) => {
+            e.preventDefault();
+            await addDoc(collection(db, "properties"), {
+                type: document.getElementById('admType').value,
+                name: document.getElementById('admName').value,
+                price: document.getElementById('admPrice').value,
+                desc: document.getElementById('admDesc').value,
+                createdAt: new Date()
+            });
+            location.reload();
+        };
+        window.onload = load;
+    </script>
+
+    <script>
+        function openForm(t) { document.getElementById('mTitle').innerText = t; document.getElementById('modalClient').classList.add('active'); }
+        function openAdmin() { if(prompt("Пароль:") === "1234") document.getElementById('modalAdmin').classList.add('active'); }
+        function closeM(id) { document.getElementById(id).classList.remove('active'); }
+    </script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS("particles-js", { "particles": { "number": { "value": 70 }, "color": { "value": "#C5A059" }, "opacity": { "value": 0.4 }, "size": { "value": 2 }, "move": { "enable": true, "speed": 1.2, "direction": "top" } } });
+    </script>
+</body>
+</html>
