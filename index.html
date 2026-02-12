@@ -3,62 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Realty | Elite</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>NonStop Realty | Premium Estate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #c5a059; --black: #0f0f0f; --white: #ffffff; --gray: #1a1a1a; }
-        * { box-sizing: border-box; }
-        body { margin: 0; background: var(--black); color: var(--white); font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--black); color: var(--white); font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
         
-        /* Навигация с Бургером */
-        nav { position: fixed; top: 0; width: 100%; z-index: 1000; background: rgba(15,15,15,0.98); border-bottom: 1px solid rgba(197,160,89,0.2); height: 70px; }
+        /* Навигация и Бургер */
+        nav { position: fixed; top: 0; width: 100%; z-index: 1000; background: rgba(15,15,15,0.9); border-bottom: 1px solid rgba(197,160,89,0.2); height: 70px; }
         .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; height: 100%; padding: 0 20px; }
-        .logo { font-family: 'Playfair Display'; font-size: 24px; color: var(--gold); text-decoration: none; font-weight: bold; }
+        .logo { font-family: 'Playfair Display'; font-size: 24px; color: var(--gold); text-decoration: none; letter-spacing: 2px; }
         
         .nav-links { display: flex; gap: 30px; }
-        .nav-links a { color: var(--white); text-decoration: none; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; transition: 0.3s; }
+        .nav-links a { color: var(--white); text-decoration: none; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; transition: 0.3s; }
         .nav-links a:hover { color: var(--gold); }
 
-        /* Иконка Бургера */
-        .burger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
-        .burger div { width: 25px; height: 2px; background: var(--gold); transition: 0.3s; }
+        .burger { display: none; cursor: pointer; flex-direction: column; gap: 6px; }
+        .burger div { width: 25px; height: 1px; background: var(--gold); transition: 0.3s; }
+
+        /* ГЛАВНЫЙ ЭКРАН (Твоя первая работа) */
+        .hero { 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center;
+            background: radial-gradient(circle, #1a1a1a 0%, #0f0f0f 100%);
+            padding: 20px;
+        }
+        .hero h1 { font-family: 'Playfair Display'; font-size: clamp(40px, 8vw, 80px); color: var(--gold); margin-bottom: 20px; text-transform: uppercase; }
+        .hero p { font-size: 14px; letter-spacing: 5px; text-transform: uppercase; opacity: 0.8; margin-bottom: 40px; }
+        .scroll-down { position: absolute; bottom: 30px; color: var(--gold); font-size: 12px; text-decoration: none; letter-spacing: 2px; animation: bounce 2s infinite; }
+
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
 
         /* Секции */
-        section { padding: 100px 20px; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid #222; }
-        h2 { font-family: 'Playfair Display'; font-size: clamp(30px, 5vw, 45px); color: var(--gold); text-align: center; margin-bottom: 60px; }
+        section { padding: 100px 20px; max-width: 1200px; margin: 0 auto; }
+        h2 { font-family: 'Playfair Display'; font-size: 36px; color: var(--gold); text-align: center; margin-bottom: 60px; text-transform: uppercase; }
 
         /* Сетка объектов */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
-        .card { background: var(--gray); padding: 30px; border: 1px solid #222; transition: 0.4s; position: relative; overflow: hidden; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: var(--gray); padding: 30px; border: 1px solid #222; transition: 0.4s; }
         .card:hover { border-color: var(--gold); transform: translateY(-5px); }
-        .card h3 { font-family: 'Playfair Display'; margin: 15px 0; }
-        .price { color: var(--gold); font-size: 22px; font-weight: 600; }
+        .card h3 { font-family: 'Playfair Display'; font-size: 24px; margin: 15px 0; color: var(--white); }
+        .price { color: var(--gold); font-size: 20px; font-weight: 600; }
 
         /* Застройщики */
         .dev-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .dev-card { border: 1px solid #333; padding: 30px; background: linear-gradient(45deg, #111, #1a1a1a); }
-        .dev-card h3 { color: var(--gold); margin-top: 0; }
+        .dev-card { padding: 30px; border-left: 2px solid var(--gold); background: #111; }
 
         /* Ипотека */
-        .mortgage-form { background: #151515; padding: 40px; border-radius: 4px; max-width: 500px; margin: 0 auto; }
+        .calc-box { background: var(--gray); padding: 40px; max-width: 500px; margin: 0 auto; border: 1px solid var(--gold); }
         input { width: 100%; padding: 15px; margin-bottom: 20px; background: #000; border: 1px solid #333; color: #fff; font-family: inherit; }
-        .btn { background: var(--gold); color: #000; padding: 18px; border: none; width: 100%; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; }
+        .btn { background: var(--gold); color: #000; padding: 18px; border: none; width: 100%; font-weight: bold; cursor: pointer; text-transform: uppercase; }
 
-        /* Мобильное меню */
+        /* Мобилка */
         @media (max-width: 768px) {
-            .nav-links { position: fixed; right: -100%; top: 70px; flex-direction: column; background: var(--black); width: 100%; text-align: center; padding: 40px 0; transition: 0.5s; border-bottom: 1px solid var(--gold); }
+            .nav-links { position: fixed; right: -100%; top: 70px; flex-direction: column; background: #0f0f0f; width: 100%; padding: 50px 0; transition: 0.5s; border-bottom: 1px solid var(--gold); height: calc(100vh - 70px); }
             .nav-links.active { right: 0; }
             .burger { display: flex; }
         }
 
-        #admin-panel { display: none; padding: 50px; background: #0a0a0a; border: 2px dashed var(--gold); margin-top: 50px; }
+        #admin-panel { display: none; padding: 50px; border: 1px dashed var(--gold); margin-top: 50px; }
     </style>
 </head>
 <body>
 
     <nav>
         <div class="nav-container">
-            <a href="#" class="logo">NONSTOP REALTY</a>
+            <a href="#" class="logo">NONSTOP</a>
             <div class="nav-links" id="navLinks">
                 <a href="#objects" onclick="toggleMenu()">Объекты</a>
                 <a href="#developers" onclick="toggleMenu()">Застройщики</a>
@@ -71,49 +86,46 @@
         </div>
     </nav>
 
+    <div class="hero">
+        <p>Агентство недвижимости</p>
+        <h1>NONSTOP REALTY</h1>
+        <p style="letter-spacing: 2px; opacity: 0.5;">Ваш путь к премиальному жилью</p>
+        <a href="#objects" class="scroll-down">ЛИСТАЙТЕ ВНИЗ ↓</a>
+    </div>
+
     <section id="objects">
-        <h2>Эксклюзивные объекты</h2>
-        <div id="objects-list" class="grid">
-            </div>
+        <h2>Каталог Объектов</h2>
+        <div id="objects-list" class="grid"></div>
     </section>
 
     <section id="developers">
         <h2>Застройщики</h2>
         <div class="dev-grid">
-            <div class="dev-card">
-                <h3>BI Group</h3>
-                <p>Крупнейший инвестиционно-строительный холдинг. Гарантия качества и сроков.</p>
-            </div>
-            <div class="dev-card">
-                <h3>BAZIS-A</h3>
-                <p>Лидер строительной индустрии с уникальными архитектурными решениями.</p>
-            </div>
-            <div class="dev-card">
-                <h3>Ramms Real Estate</h3>
-                <p>Премиальные жилые комплексы в лучших локациях города.</p>
-            </div>
+            <div class="dev-card"><h3>BI Group</h3><p>Надежность проверенная временем.</p></div>
+            <div class="dev-card"><h3>BAZIS-A</h3><p>Архитектурное превосходство.</p></div>
+            <div class="dev-card"><h3>RAMS</h3><p>Комфорт в каждой детали.</p></div>
         </div>
     </section>
 
     <section id="mortgage">
-        <h2>Рассчитать ипотеку</h2>
-        <div class="mortgage-form">
-            <input type="number" id="mPrice" placeholder="Стоимость ($)">
-            <input type="number" id="mDown" placeholder="Первый взнос ($)">
+        <h2>Ипотека</h2>
+        <div class="calc-box">
+            <input type="number" id="mPrice" placeholder="Цена ($)">
+            <input type="number" id="mDown" placeholder="Взнос ($)">
             <input type="number" id="mTerm" placeholder="Срок (лет)">
-            <button class="btn" onclick="calc()">Рассчитать платеж</button>
-            <div id="mRes" style="margin-top:25px; text-align:center; font-size:24px; color:var(--gold)"></div>
+            <button class="btn" onclick="calc()">Узнать платеж</button>
+            <div id="mRes" style="margin-top:20px; text-align:center; color:var(--gold); font-size:20px;"></div>
         </div>
     </section>
 
     <section id="admin-panel">
-        <h2>Панель управления</h2>
+        <h2>Новый лот</h2>
         <form id="addForm">
-            <input type="text" id="aType" placeholder="Тип (напр. Пентхаус)" required>
-            <input type="text" id="aName" placeholder="Название ЖК" required>
+            <input type="text" id="aType" placeholder="Тип" required>
+            <input type="text" id="aName" placeholder="Название" required>
             <input type="text" id="aPrice" placeholder="Цена" required>
-            <textarea id="aDesc" style="width:100%; background:#000; color:#fff; padding:15px; border:1px solid #333; margin-bottom:20px;" placeholder="Описание"></textarea>
-            <button type="submit" class="btn">Добавить на сайт</button>
+            <textarea id="aDesc" placeholder="Описание" style="width:100%; height:100px; background:#000; color:#fff; padding:15px; margin-bottom:20px; font-family: inherit;"></textarea>
+            <button type="submit" class="btn">Опубликовать</button>
         </form>
     </section>
 
@@ -121,46 +133,42 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // ТВОИ КАНФИГИ (ВСТАВЬ СВОИ ДАННЫЕ СЮДА!)
+        // ========================================================
+        // СЮДА ВСТАВЛЯЙ СВОЙ КОНФИГ ИЗ FIREBASE:
         const firebaseConfig = {
-            apiKey: "AIza...", 
-            authDomain: "...",
-            projectId: "...",
-            storageBucket: "...",
-            messagingSenderId: "...",
-            appId: "..."
+            apiKey: "ВСТАВЬ_СВОЙ_API_KEY",
+            authDomain: "ВСТАВЬ_DOMAIN",
+            projectId: "ВСТАВЬ_PROJECT_ID",
+            storageBucket: "ВСТАВЬ_BUCKET",
+            messagingSenderId: "ID",
+            appId: "APP_ID"
         };
+        // ========================================================
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Бургер меню
-        window.toggleMenu = () => {
-            document.getElementById('navLinks').classList.toggle('active');
-        };
+        window.toggleMenu = () => { document.getElementById('navLinks').classList.toggle('active'); };
 
-        // Загрузка данных
-        async function loadData() {
+        async function load() {
             const container = document.getElementById('objects-list');
-            const q = query(collection(db, "properties"), orderBy("createdAt", "desc"));
-            const snap = await getDocs(q);
-            container.innerHTML = '';
-            snap.forEach(doc => {
-                const item = doc.data();
-                container.innerHTML += `
-                    <div class="card">
-                        <small style="color:var(--gold); text-transform:uppercase; letter-spacing:1px">${item.type}</small>
+            try {
+                const q = query(collection(db, "properties"), orderBy("createdAt", "desc"));
+                const snap = await getDocs(q);
+                container.innerHTML = '';
+                snap.forEach(doc => {
+                    const item = doc.data();
+                    container.innerHTML += `<div class="card">
+                        <small style="color:var(--gold)">${item.type}</small>
                         <h3>${item.name}</h3>
                         <div class="price">${item.price}</div>
-                        <p style="font-size:12px; opacity:0.6; line-height:1.6; margin-top:15px">${item.desc}</p>
+                        <p style="font-size:12px; opacity:0.6; margin-top:10px">${item.desc}</p>
                     </div>`;
-            });
+                });
+            } catch (e) { console.log("Ошибка загрузки. Проверь ключи Firebase!"); }
         }
 
-        // Админка
-        window.showAdmin = () => {
-            if(prompt("Пароль?") === '1234') document.getElementById('admin-panel').style.display = 'block';
-        };
+        window.showAdmin = () => { if(prompt("Пароль?") === '1234') document.getElementById('admin-panel').style.display = 'block'; };
 
         document.getElementById('addForm').onsubmit = async (e) => {
             e.preventDefault();
@@ -171,20 +179,18 @@
                 desc: document.getElementById('aDesc').value,
                 createdAt: new Date()
             });
-            alert("Готово!");
             location.reload();
         };
 
-        // Калькулятор
         window.calc = () => {
             let p = document.getElementById('mPrice').value;
             let d = document.getElementById('mDown').value;
             let t = document.getElementById('mTerm').value;
-            let res = ((p - d) / (t * 12)) * 1.08; // Примерный расчет
-            document.getElementById('mRes').innerHTML = `Платеж: $${Math.round(res)} / мес.`;
+            let res = ((p - d) / (t * 12)) * 1.09;
+            document.getElementById('mRes').innerHTML = `Примерно: $${Math.round(res)} / мес.`;
         };
 
-        window.onload = loadData;
+        window.onload = load;
     </script>
 </body>
 </html>
